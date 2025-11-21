@@ -1,36 +1,114 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MiniHoop Frontend
 
-## Getting Started
+MiniHoop は、ミニバスケットボールチームの「練習スケジュール共有」「出欠管理」「月謝確認」をオンラインで完結させるための Web アプリケーションです。
 
-First, run the development server:
+このリポジトリは、MiniHoop の **フロントエンド（Next.js / TypeScript）** を管理します。
+
+
+## 🏀 アプリ概要
+
+MiniHoop は、ミニバスケットボール（小学生向け）のチーム運営をサポートするためのアプリケーションです。
+
+これまで LINE メッセージや口頭で行っていた以下のような運用を Web アプリとして整理し、  
+コーチ・保護者双方の負担を減らすことを目的としています。
+
+- 練習スケジュールの確認
+- 各練習日の出欠登録
+- 月謝の支払い状況の確認
+- 練習終了時の通知（LINE 連携を想定）
+- 新規参加者からの問い合わせ
+
+本フロントエンドは、これらの機能を **ブラウザから直感的に操作できる UI** として提供します。  
+PC / スマートフォン両方からの利用を想定したレスポンシブデザインを目標としています。
+
+
+## 🎯 作成に至った背景
+
+開発者はミニバスケットボールチームのコーチとして、以下のような課題を日常的に感じていました。
+
+- 毎月、iPhone アプリで縦型カレンダーを作成し、スクリーンショットを撮って LINE グループに共有している
+- その後、保護者から個別に「この日参加できます／できません」と連絡が届き、把握が大変
+- 月謝は封筒での手渡し＋ハンコ管理のため、「誰がどの月まで支払い済みか」を瞬時に把握しづらい
+- すべてが LINE の運用に閉じており、履歴の検索性・一覧性が低い
+
+これらの情報を **Web 上で一元管理できる画面** として再設計し、  
+保護者にとっても「スマホから簡単に使える」UI を用意したいという思いからフロントエンドを実装しています。
+
+あわせて、Next.js / TypeScript を用いたモダンなフロントエンド開発の実績として、  
+**Web アプリケーションエンジニアとしてのスキルセットをポートフォリオとして示すこと** も目的としています。
+
+
+## 🧱 このリポジトリの役割
+
+- バックエンド（Rails API）と連携し、以下の画面を提供
+  - 練習スケジュールのカレンダー表示・一覧表示
+  - 各練習日の出欠登録画面
+  - 月謝支払い状況の確認画面
+- 管理者向け（コーチ用）画面と保護者向け画面の両方を提供
+  - 管理者：スケジュール作成・編集、出欠・月謝の管理を行う画面
+  - 保護者：スケジュール確認や出欠登録を行う画面
+- 認証・ログイン導線の実装
+  - 保護者：LINE ログイン（LIFF / LINE Login）を想定
+  - 管理者：LINE ログイン or Firebase Auth を想定
+- API 通信・ローディング状態・エラーハンドリングなど、フロント側の UX を最適化
+
+バックエンドとの責務分離を意識しつつ、**フロントエンドとしてのドメイン理解と UI 設計** をこのリポジトリで表現します。
+
+
+## 🛠 使用技術スタック
+
+### 言語・フレームワーク
+
+- TypeScript 5 系
+- Next.js 15 系（App Router 前提）
+- React
+
+### UI / フォーム / 状態管理
+
+- UI ライブラリ：Chakra UI（または同等のコンポーネントライブラリ）
+- フォーム管理：React Hook Form
+- バリデーション：Zod
+- データフェッチ・キャッシュ：React Query（@tanstack/react-query） など
+
+### 認証・外部サービス
+
+- Firebase Auth（管理者ログインを想定）
+- LINE Login / LIFF（保護者ログインを想定）
+- REST API クライアント：axios など
+
+### インフラ・デプロイ
+
+- Vercel（Preview / Staging / Production 環境）
+- GitHub / GitHub Actions（CI/CD）
+
+### 開発ツール・その他
+
+- ESLint（Lint）
+- Prettier（コードフォーマッタ）
+- Jest / React Testing Library（テスト）
+- Volta / Node.js（バージョン管理）
+
+
+## 🧪 主な画面・機能（予定を含む）
+
+- 管理者向け（コーチ用）
+  - 練習スケジュール一覧・カレンダー表示
+  - 練習スケジュールの作成／編集／削除
+  - 出欠状況の一覧表示・集計
+  - 月謝支払い状況の一覧表示
+- 保護者向け
+  - 練習スケジュールの一覧表示
+  - 各練習日の出欠登録（出席／欠席）
+  - 月謝支払い状況の確認
+- 認証・ログイン
+  - LINE ログイン導線（保護者）
+  - Firebase Auth / LINE ログイン導線（管理者）
+
+
+## ⚙️ 環境構築方法
+
+※ まだ整理中のため、後で追記します。
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# TODO: Node / Volta / パッケージマネージャのセットアップ
+# TODO: npm run dev / pnpm dev などの起動方法や、使用ポートの設定方法を記載
