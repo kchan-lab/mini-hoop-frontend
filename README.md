@@ -68,7 +68,7 @@ PC / スマートフォン両方からの利用を想定したレスポンシブ
 - UI ライブラリ：Chakra UI（または同等のコンポーネントライブラリ）
 - フォーム管理：React Hook Form
 - バリデーション：Zod
-- データフェッチ・キャッシュ：React Query（@tanstack/react-query） など
+- データフェッチ・キャッシュ：React Query（@tanstack/react-query）
 
 ### 認証・外部サービス
 
