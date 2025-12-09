@@ -74,7 +74,7 @@ PC / スマートフォン両方からの利用を想定したレスポンシブ
 
 - Firebase Auth（管理者ログインを想定）
 - LINE Login / LIFF（保護者ログインを想定）
-- REST API クライアント：axios など
+- REST API クライアント：axios
 
 ### インフラ・デプロイ
 
