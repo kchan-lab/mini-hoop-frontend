@@ -91,14 +91,14 @@ function ChildSection({ index, onRemove, canRemove }: {
           </FormField>
         </div>
 
-        <FormField label="参加可能曜日" error={childErrors?.availableDays?.message}>
+        <FormField label="参加可能曜日（複数選択可）" error={childErrors?.availableDays?.message}>
           <DaySelector
             value={availableDays}
             onChange={(days: DayOfWeek[]) => setValue(`children.${index}.availableDays`, days)}
           />
         </FormField>
 
-        <FormField label="参加可能時間帯" error={childErrors?.availableTimeSlots?.message}>
+        <FormField label="参加可能時間帯（複数選択可）" error={childErrors?.availableTimeSlots?.message}>
           <MultiSelect
             options={TIME_SLOTS}
             value={availableTimeSlots}
