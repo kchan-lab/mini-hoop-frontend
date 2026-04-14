@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useCallback, useRef, useState } from "react";
+import { useClickOutside } from "@/hooks/useClickOutside";
 
 type Option = {
   value: string;
@@ -22,16 +23,9 @@ export function MultiSelect({
 }: MultiSelectProps) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const closeMenu = useCallback(() => setIsOpen(false), []);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  useClickOutside(containerRef, closeMenu, isOpen);
 
   const toggleOption = (optionValue: string) => {
     if (value.includes(optionValue)) {
@@ -50,14 +44,22 @@ export function MultiSelect({
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-full h-12 px-3 text-left border rounded-xl bg-white flex justify-between items-center ${
+        className={`w-full h-12 px-3 text-left border rounded-xl bg-white flex justify-between items-center gap-2 ${
           isOpen ? "border-amber-400" : "border-stone-200"
         }`}
       >
-        <span className={selectedLabels.length === 0 ? "text-stone-400" : "text-stone-900"}>
+        <span
+          className={`min-w-0 truncate ${
+            selectedLabels.length === 0 ? "text-stone-400" : "text-stone-900"
+          }`}
+        >
           {selectedLabels.length > 0 ? selectedLabels.join(", ") : placeholder}
         </span>
-        <span className={`text-stone-400 transition-transform ${isOpen ? "rotate-180" : ""}`}>
+        <span
+          className={`flex-shrink-0 text-stone-400 transition-transform ${
+            isOpen ? "rotate-180" : ""
+          }`}
+        >
           ▼
         </span>
       </button>
