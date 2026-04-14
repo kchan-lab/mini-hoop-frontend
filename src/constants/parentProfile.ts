@@ -11,11 +11,9 @@ export const DAYS_OF_WEEK = [
 export type DayOfWeek = (typeof DAYS_OF_WEEK)[number]["value"];
 
 export const TIME_SLOTS = [
-  { value: "morning", label: "午前" },
-  { value: "afternoon", label: "午後" },
-  { value: "evening", label: "夕方" },
-  { value: "night", label: "夜" },
-  { value: "all", label: "終日可能" },
+  { value: "morning", label: "午前（9:00-13:00）" },
+  { value: "afternoon", label: "午後（13:00-17:00）" },
+  { value: "evening_night", label: "夕方・夜（17:00-21:00）" },
 ] as const;
 
 export type TimeSlot = (typeof TIME_SLOTS)[number]["value"];
