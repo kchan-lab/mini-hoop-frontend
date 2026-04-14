@@ -173,21 +173,11 @@ export function ParentRegisterForm() {
 
         {/* お子様情報 */}
         <div className="space-y-4">
-          <div className="flex items-center justify-between px-1">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-amber-100 rounded-lg flex items-center justify-center">
-                <Users className="w-4 h-4 text-amber-700" />
-              </div>
-              <h2 className="font-medium text-amber-700">お子様情報</h2>
+          <div className="flex items-center gap-2 px-1">
+            <div className="w-8 h-8 bg-amber-100 rounded-lg flex items-center justify-center">
+              <Users className="w-4 h-4 text-amber-700" />
             </div>
-            <button
-              type="button"
-              onClick={() => append(createDefaultChild())}
-              className="flex items-center gap-1 px-3 py-1.5 text-sm border border-amber-300 text-amber-700 rounded-xl hover:bg-amber-50 transition-colors"
-            >
-              <Plus className="w-4 h-4" />
-              子供を追加
-            </button>
+            <h2 className="font-medium text-amber-700">お子様情報</h2>
           </div>
 
           {fields.map((field, index) => (
@@ -198,6 +188,15 @@ export function ParentRegisterForm() {
               canRemove={fields.length > 1}
             />
           ))}
+
+          <button
+            type="button"
+            onClick={() => append(createDefaultChild())}
+            className="flex h-12 w-full items-center justify-center gap-2 rounded-lg border border-dashed border-amber-300 text-sm font-medium text-amber-700 transition-colors hover:bg-amber-50"
+          >
+            <Plus className="w-4 h-4" />
+            子供を追加
+          </button>
 
           {errors.children?.root && (
             <p className="text-sm text-red-500">{errors.children.root.message}</p>
